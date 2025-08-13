@@ -1,11 +1,11 @@
 package io.github.ArmandCuvelier.Pokemon_Fortress;
-
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 
-/** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends Game {
     @Override
     public void create() {
-        setScreen(new FirstScreen());
+        Gdx.graphics.setWindowedMode(1024, 576);
+        setScreen(new FirstScreen(this));
     }
 }

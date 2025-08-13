@@ -1,45 +1,73 @@
 package io.github.ArmandCuvelier.Pokemon_Fortress;
-
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /** First screen of the application. Displayed after the application is created. */
 public class FirstScreen implements Screen {
+    private final Game game;
+    private Texture img;
+    private SpriteBatch batch;
+    private int height = 576;
+    private int width = 1024;
+    
+    // Initialise the game
+    public FirstScreen(Game game) {
+        this.game = game;
+    }
+
     @Override
     public void show() {
-        // Prepare your screen here.
+        batch = new SpriteBatch();
+        img = new Texture(Gdx.files.internal("img/First_screen.png")); 
+        resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     @Override
     public void render(float delta) {
-        // Draw your screen here. "delta" is the time since last render in seconds.
+        batch.begin();
+        batch.draw(img, 0, 0, this.width, this.height);
+        batch.end();
     }
 
     @Override
     public void resize(int width, int height) {
-        // If the window is minimized on a desktop (LWJGL3) platform, width and height are 0, which causes problems.
-        // In that case, we don't resize anything, and wait for the window to be a normal size before updating.
         if(width <= 0 || height <= 0) return;
-
-        // Resize your screen here. The parameters represent the new window size.
+        
+        float targetRatio = 1024f/576f;
+        float currentRatio = width/(float)height;
+        if(currentRatio > targetRatio) {
+            this.width = (int)(height * targetRatio);
+            this.height = height;
+        } else {
+            this.width = width;
+            this.height = (int)(width / targetRatio);
+        }
+        Gdx.gl.glViewport(
+            (width - this.width)/2,
+            (height - this.height)/2,
+            this.width,
+            this.height
+        );
     }
 
     @Override
     public void pause() {
-        // Invoked when your application is paused.
     }
 
     @Override
     public void resume() {
-        // Invoked when your application is resumed after pause.
     }
 
     @Override
     public void hide() {
-        // This method is called when another screen replaces this one.
     }
 
     @Override
     public void dispose() {
-        // Destroy screen's assets here.
+        batch.dispose();
+        img.dispose();
     }
 }
