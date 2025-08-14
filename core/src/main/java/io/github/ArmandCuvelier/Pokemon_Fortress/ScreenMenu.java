@@ -1,43 +1,27 @@
 package io.github.ArmandCuvelier.Pokemon_Fortress;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.GL20;
 
-/** First screen of the application. Displayed after the application is created. */
-public class FirstScreen implements Screen {
+public class ScreenMenu implements Screen {
     private final Game game;
-    private Texture img;
-    private SpriteBatch background;
-    private BitmapFont text;
     private int height = 576;
     private int width = 1024;
-    
-    // Initialise the game
-    public FirstScreen(Game game) {
-        this.game = game;
+
+    public ScreenMenu(Game game){
+        this.game=game;
     }
 
     @Override
     public void show() {
-        background = new SpriteBatch();
-        img = new Texture(Gdx.files.internal("img/First_screen.png"));
-        text = new BitmapFont();
-        text.getData().setScale(2);
-        resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     @Override
     public void render(float delta) {
-        background.begin();
-        background.draw(img, 0, 0, this.width, this.height);
-        text.draw(background,"Click to Start",425,75);
-        background.end();
-        if (Gdx.input.justTouched()){
-            game.setScreen(new ScreenMenu(game));
-        }
+        Gdx.gl.glClearColor(0.4196f, 0f, 0f, 1f);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
 
     @Override
@@ -75,7 +59,5 @@ public class FirstScreen implements Screen {
 
     @Override
     public void dispose() {
-        background.dispose();
-        img.dispose();
     }
 }
