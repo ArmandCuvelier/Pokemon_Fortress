@@ -21,9 +21,13 @@ public class ScreenMenu implements Screen {
     // The button
     private Rectangle r1, r2, r3, r4, r5, r6, r7, r8;
 
+    // The x and y of the 8 world
+    private int y_world1, y_world2;
+    private int x_world1, x_world2, x_world3, x_world4;
+
     // The width and height of the 8 world
-    private int height_world1, height_world2;
-    private int width_world1, width_world2, width_world3, width_world4;
+    private int width_world;
+    private int height_world;
 
     public ScreenMenu(Game game) {
         this.game = game;
@@ -43,23 +47,27 @@ public class ScreenMenu implements Screen {
         world7 = new Texture("img/World7.png");
         world8 = new Texture("img/World8.png");
 
+        // Initialisation of the x and y of the world
+        y_world1 = (int) (Gdx.graphics.getHeight()/2 - (Gdx.graphics.getHeight()/2*0.01));
+        y_world2 = (int) (Gdx.graphics.getHeight()/2*0.2);
+        x_world1 = (int) ((Gdx.graphics.getWidth()) - (Gdx.graphics.getWidth()*0.9));
+        x_world2 = (int) ((Gdx.graphics.getWidth()) - (Gdx.graphics.getWidth()*0.7));
+        x_world3 = (int) ((Gdx.graphics.getWidth()) - (Gdx.graphics.getWidth()*0.5));
+        x_world4 = (int) ((Gdx.graphics.getWidth()) - (Gdx.graphics.getWidth()*0.3));
+
         // Initialisation of the width and height of the world
-        height_world1 = (int) (Gdx.graphics.getHeight()/2 - (Gdx.graphics.getHeight()/2*0.01));
-        height_world2 = (int) (Gdx.graphics.getHeight()/2*0.2);
-        width_world1 = (int) ((Gdx.graphics.getWidth()) - (Gdx.graphics.getWidth()*0.9));
-        width_world2 = (int) ((Gdx.graphics.getWidth()) - (Gdx.graphics.getWidth()*0.7));
-        width_world3 = (int) ((Gdx.graphics.getWidth()) - (Gdx.graphics.getWidth()*0.5));
-        width_world4 = (int) ((Gdx.graphics.getWidth()) - (Gdx.graphics.getWidth()*0.3));
+        width_world = (int)(Gdx.graphics.getWidth()/5);
+        height_world = (int)(Gdx.graphics.getHeight()*0.35);
 
         // Creation of the button with the texture of the world
-        r1 = new Rectangle(width_world1, height_world1, 200, 200);
-        r2 = new Rectangle(width_world2, height_world1, 200, 200);
-        r3 = new Rectangle(width_world3, height_world1, 200, 200);
-        r4 = new Rectangle(width_world4, height_world1, 200, 200);
-        r5 = new Rectangle(width_world1, height_world2, 200, 200);
-        r6 = new Rectangle(width_world2, height_world2, 200, 200);
-        r7 = new Rectangle(width_world3, height_world2, 200, 200);
-        r8 = new Rectangle(width_world4, height_world2, 200, 200);
+        r1 = new Rectangle(x_world1, y_world1, width_world, height_world);
+        r2 = new Rectangle(x_world2, y_world1, width_world, height_world);
+        r3 = new Rectangle(x_world3, y_world1, width_world, height_world);
+        r4 = new Rectangle(x_world4, y_world1, width_world, height_world);
+        r5 = new Rectangle(x_world1, y_world2, width_world, height_world);
+        r6 = new Rectangle(x_world2, y_world2, width_world, height_world);
+        r7 = new Rectangle(x_world3, y_world2, width_world, height_world);
+        r8 = new Rectangle(x_world4, y_world2, width_world, height_world);
     }
 
     @Override
@@ -95,7 +103,7 @@ public class ScreenMenu implements Screen {
     }
 
     private void onWorld1Clicked() {
-
+        game.setScreen(new WorldScreen(game, new float[] {0.3f, 0.3f, 0.25f, 1f}));
     }
 
     private void onWorld2Clicked() {
