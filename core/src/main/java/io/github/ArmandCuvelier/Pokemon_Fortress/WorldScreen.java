@@ -17,7 +17,7 @@ public class WorldScreen implements Screen {
     private int width = 1024;
 
     // The level and their way to connect
-    private Texture level1,level2,level3,level4,way1,way2,way3;
+    private Texture level1,level2,level3,level4;
 
     // The level and their way to 
     private Rectangle r1, r2, r3, r4;
@@ -48,9 +48,6 @@ public class WorldScreen implements Screen {
         level2 = new Texture("img/level.png");
         level3 = new Texture("img/level.png");
         level4 = new Texture("img/level.png");
-        way1 = new Texture("img/way_line.png");
-        way2 = new Texture("img/way_diagonal_left.png");
-        way3 = new Texture("img/way_diagonal_right.png");
 
         // Initalisation of the width and height of the level
         width_level = (int) (Gdx.graphics.getWidth()/5.68);

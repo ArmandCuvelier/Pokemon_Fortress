@@ -18,8 +18,11 @@ public class ScreenMenu implements Screen {
     // The world
     private Texture world1, world2, world3, world4, world5, world6, world7, world8;
 
+    // The menu
+    private Texture menu_teams;
+
     // The button
-    private Rectangle r1, r2, r3, r4, r5, r6, r7, r8;
+    private Rectangle r1, r2, r3, r4, r5, r6, r7, r8, r9;
 
     // The x and y of the 8 world
     private int y_world1, y_world2;
@@ -29,6 +32,14 @@ public class ScreenMenu implements Screen {
     private int width_world;
     private int height_world;
 
+    // The width and height of the menu
+    private int width_menu;
+    private int height_menu;
+
+    // The x and y of the menu
+    private int x_menu;
+    private int y_menu;
+
     public ScreenMenu(Game game) {
         this.game = game;
     }
@@ -37,7 +48,7 @@ public class ScreenMenu implements Screen {
     public void show() {
         batch = new SpriteBatch();
 
-        // Definition of the texture
+        // Definition of the texture for the world
         world1 = new Texture("img/World1.png");
         world2 = new Texture("img/World2.png");
         world3 = new Texture("img/World3.png");
@@ -47,9 +58,12 @@ public class ScreenMenu implements Screen {
         world7 = new Texture("img/World7.png");
         world8 = new Texture("img/World8.png");
 
+        // Definition of the menu
+        menu_teams = new Texture("img/menu_teams.png");
+
         // Initialisation of the x and y of the world
-        y_world1 = (int) (Gdx.graphics.getHeight()/2 - (Gdx.graphics.getHeight()/2*0.01));
-        y_world2 = (int) (Gdx.graphics.getHeight()/2*0.2);
+        y_world1 = (int) (Gdx.graphics.getHeight()/2 - (Gdx.graphics.getHeight()/2*0.2));
+        y_world2 = (int) (Gdx.graphics.getHeight()/2*0.05);
         x_world1 = (int) ((Gdx.graphics.getWidth()) - (Gdx.graphics.getWidth()*0.9));
         x_world2 = (int) ((Gdx.graphics.getWidth()) - (Gdx.graphics.getWidth()*0.7));
         x_world3 = (int) ((Gdx.graphics.getWidth()) - (Gdx.graphics.getWidth()*0.5));
@@ -59,7 +73,15 @@ public class ScreenMenu implements Screen {
         width_world = (int)(Gdx.graphics.getWidth()/5);
         height_world = (int)(Gdx.graphics.getHeight()*0.35);
 
-        // Creation of the button with the texture of the world
+        // Initialisation of the width and height of the menu
+        width_menu = (int)(Gdx.graphics.getWidth()*0.6);
+        height_menu = (int)(Gdx.graphics.getHeight()*0.2);
+
+        // Initialisation of the x and y of the menu
+        x_menu = (int) ((Gdx.graphics.getWidth())*0.2);
+        y_menu = (int) ((Gdx.graphics.getHeight())-height_menu);
+
+        // Creation of the button with the texture
         r1 = new Rectangle(x_world1, y_world1, width_world, height_world);
         r2 = new Rectangle(x_world2, y_world1, width_world, height_world);
         r3 = new Rectangle(x_world3, y_world1, width_world, height_world);
@@ -68,7 +90,8 @@ public class ScreenMenu implements Screen {
         r6 = new Rectangle(x_world2, y_world2, width_world, height_world);
         r7 = new Rectangle(x_world3, y_world2, width_world, height_world);
         r8 = new Rectangle(x_world4, y_world2, width_world, height_world);
-    }
+        r9 = new Rectangle(x_menu, y_menu, width_menu, height_menu);
+    }   
 
     @Override
     public void render(float delta) {
@@ -85,6 +108,7 @@ public class ScreenMenu implements Screen {
         batch.draw(world6, r6.x, r6.y, r6.width, r6.height);
         batch.draw(world7, r7.x, r7.y, r7.width, r7.height);
         batch.draw(world8, r8.x, r8.y, r8.width, r8.height);
+        batch.draw(menu_teams, r9.x, r9.y, r9.width, r9.height);
         batch.end();
 
         // Détection of the clicks
@@ -99,6 +123,7 @@ public class ScreenMenu implements Screen {
             if(r6.contains(mouseX, mouseY)) onWorld6Clicked();
             if(r7.contains(mouseX, mouseY)) onWorld7Clicked();
             if(r8.contains(mouseX, mouseY)) onWorld8Clicked();
+            if(r9.contains(mouseX, mouseY)) onMenuTeamsClicked();
         }
     }
 
@@ -131,6 +156,10 @@ public class ScreenMenu implements Screen {
     }
 
     private void onWorld8Clicked() {
+
+    }
+
+    private void onMenuTeamsClicked() {
 
     }
 
@@ -181,5 +210,6 @@ public class ScreenMenu implements Screen {
         world6.dispose();
         world7.dispose();
         world8.dispose();
+        menu_teams.dispose();
     }
 }
